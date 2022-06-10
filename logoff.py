@@ -18,18 +18,16 @@ import time
 
 
 def restart():
-    # pu = customtkinter.CTkToplevel(st)
     pu = tkinter.Toplevel(st)
     pu.attributes('-transparentcolor', '#012345')
-    pu.geometry('450x180')
+    # pu.geometry('450x180')
     pu.config(bg='#012345')
 
     def f_now():
         pu.destroy()
-        pu.quit()
-        os.system("shutdown -r -t 2")
+        os.system('shutdown -r -t 1')
 
-    def f_restart():
+    def f_after():
         a = int(var1.get())
         b = int(var2.get())
         work = (a * 60 + b) * 60
@@ -37,7 +35,7 @@ def restart():
         # print(work)
         os.system(f"shutdown -r -t {work}")
 
-    def f_shutdown():
+    def f_at():
         a = int(var3.get())
         b = int(var4.get())
 
@@ -84,35 +82,49 @@ def restart():
     var3 = StringVar()
     var4 = StringVar()
 
-    ########### At time ###########
-    l1 = tkinter.Label(pu, text='Restart after:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    ########### time after ###########
+    l1 = tkinter.Label(pu, text='Shutdown after:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
     l1.grid(row=0, column=0, padx=10, pady=10)
 
     cmb1 = ttk.Combobox(pu, value=hour, textvariable=var1, width=10)
-    cmb1.grid(row=0, column=1, padx=10, pady=10)
+    cmb1.grid(row=0, column=1, padx=1, pady=10)
     cmb1.current(0)
 
+    l1 = tkinter.Label(pu, text='Hours', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=0, column=2, padx=1, pady=10)
+
     cmb2 = ttk.Combobox(pu, value=min, textvariable=var2, width=10)
-    cmb2.grid(row=0, column=2, padx=10, pady=10)
+    cmb2.grid(row=0, column=3, padx=1, pady=10)
     cmb2.current(0)
 
-    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'), command=f_restart, width=6)
-    button.grid(row=0, column=3, padx=10, pady=10)
+    l1 = tkinter.Label(pu, text='Mins', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=0, column=4, padx=1, pady=10)
 
-    ############ From Now ##########
-    l1 = tkinter.Label(pu, text='Restart At:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
-    l1.grid(row=1, column=0, padx=10, pady=10)
+    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
+                            command=f_after, width=6)
+    button.grid(row=0, column=5, padx=10, pady=10)
+
+    ############ time at ##########
+    l1 = tkinter.Label(pu, text='Shutdown At:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=1, column=0, padx=1, pady=10)
 
     cmb3 = ttk.Combobox(pu, value=hour, textvariable=var3, width=10)
-    cmb3.grid(row=1, column=1, padx=10, pady=10)
+    cmb3.grid(row=1, column=1, padx=1, pady=10)
     cmb3.current(0)
 
-    cmb4 = ttk.Combobox(pu, value=min, textvariable=var4, width=10 )
-    cmb4.grid(row=1, column=2, padx=10, pady=10)
+    l1 = tkinter.Label(pu, text='Hours', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=1, column=2, padx=1, pady=10)
+
+    cmb4 = ttk.Combobox(pu, value=min, textvariable=var4, width=10)
+    cmb4.grid(row=1, column=3, padx=1, pady=10)
     cmb4.current(0)
 
-    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'), command=f_shutdown, width=6)
-    button.grid(row=1, column=3, pady=10, padx=10)
+    l1 = tkinter.Label(pu, text='Mins', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=1, column=4, padx=1, pady=10)
+
+    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
+                            command=f_at, width=6)
+    button.grid(row=1, column=5, pady=10, padx=10)
 
     ########### Close button ##########
     close_button = tkinter.Button(master=pu,
@@ -140,7 +152,7 @@ def restart():
                                   command=pu.destroy,
                                   width=6
                                   )
-    close_button.grid(row=2, column=2, pady=3)
+    close_button.grid(row=2, column=3, pady=3)
 
     pu.mainloop()
     # print('restart_time')
@@ -149,14 +161,14 @@ def restart():
 def shutdown():
     pu = tkinter.Toplevel(st)
     pu.attributes('-transparentcolor', '#012345')
-    pu.geometry('450x180')
+    # pu.geometry('450x180')
     pu.config(bg='#012345')
 
     def f_now():
         pu.destroy()
-        os.system('shutdown -s -t 2')
+        os.system('shutdown -s -t 1')
 
-    def f_restart():
+    def f_after():
         a = int(var1.get())
         b = int(var2.get())
         work = (a * 60 + b) * 60
@@ -164,7 +176,7 @@ def shutdown():
         # print(work)
         os.system(f"shutdown -s -t {work}")
 
-    def f_shutdown():
+    def f_at():
         a = int(var3.get())
         b = int(var4.get())
 
@@ -211,37 +223,49 @@ def shutdown():
     var3 = StringVar()
     var4 = StringVar()
 
-    ########### At time ###########
+    ########### time after ###########
     l1 = tkinter.Label(pu, text='Shutdown after:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
     l1.grid(row=0, column=0, padx=10, pady=10)
 
     cmb1 = ttk.Combobox(pu, value=hour, textvariable=var1, width=10)
-    cmb1.grid(row=0, column=1, padx=10, pady=10)
+    cmb1.grid(row=0, column=1, padx=1, pady=10)
     cmb1.current(0)
 
+    l1 = tkinter.Label(pu, text='Hours', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=0, column=2, padx=1, pady=10)
+
     cmb2 = ttk.Combobox(pu, value=min, textvariable=var2, width=10)
-    cmb2.grid(row=0, column=2, padx=10, pady=10)
+    cmb2.grid(row=0, column=3, padx=1, pady=10)
     cmb2.current(0)
 
-    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
-                            command=f_restart, width=6)
-    button.grid(row=0, column=3, padx=10, pady=10)
+    l1 = tkinter.Label(pu, text='Mins', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=0, column=4, padx=1, pady=10)
 
-    ############ From Now ##########
+    button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
+                            command=f_after, width=6)
+    button.grid(row=0, column=5, padx=10, pady=10)
+
+    ############ time at ##########
     l1 = tkinter.Label(pu, text='Shutdown At:', font=('Times', 12, 'bold'), bg="#012345", fg='white')
-    l1.grid(row=1, column=0, padx=10, pady=10)
+    l1.grid(row=1, column=0, padx=1, pady=10)
 
     cmb3 = ttk.Combobox(pu, value=hour, textvariable=var3, width=10)
-    cmb3.grid(row=1, column=1, padx=10, pady=10)
+    cmb3.grid(row=1, column=1, padx=1, pady=10)
     cmb3.current(0)
 
+    l1 = tkinter.Label(pu, text='Hours', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=1, column=2, padx=1, pady=10)
+
     cmb4 = ttk.Combobox(pu, value=min, textvariable=var4, width=10)
-    cmb4.grid(row=1, column=2, padx=10, pady=10)
+    cmb4.grid(row=1, column=3, padx=1, pady=10)
     cmb4.current(0)
 
+    l1 = tkinter.Label(pu, text='Mins', font=('Times', 12, 'bold'), bg="#012345", fg='white')
+    l1.grid(row=1, column=4, padx=1, pady=10)
+
     button = tkinter.Button(master=pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
-                            command=f_shutdown, width=6)
-    button.grid(row=1, column=3, pady=10, padx=10)
+                            command=f_at, width=6)
+    button.grid(row=1, column=5, pady=10, padx=10)
 
     ########### Close button ##########
     close_button = tkinter.Button(master=pu,
@@ -269,7 +293,7 @@ def shutdown():
                                   command=pu.destroy,
                                   width=6
                                   )
-    close_button.grid(row=2, column=2, pady=3)
+    close_button.grid(row=2, column=3, pady=3)
 
     pu.mainloop()
     # os.system("shutdown -s -t 5")
