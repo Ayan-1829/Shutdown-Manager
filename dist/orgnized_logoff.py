@@ -11,7 +11,7 @@ class topWindow():
 
     def __init__(self):
         self.pu = tkinter.Toplevel(st)
-        self.pu.config(bg='#dddddd')
+        self.pu.config(bg='#223333')
         # self.pu.geometry('540x180')
         self.hour = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12', '13', '14', '15', '16', '17',
                      '18',
@@ -29,7 +29,7 @@ class topWindow():
         # self.var4 = self.StringVar()
 
         label_fnt = ('Times', 15, 'bold')
-        label_background = '#cccccc'
+        label_background = '#223333'
 
         ########### time after ###########
         self.l1 = tkinter.Label(self.pu, font=label_fnt, bg=label_background, fg='white')
@@ -47,8 +47,8 @@ class topWindow():
         self.l3 = tkinter.Label(self.pu, text='Mins', font=label_fnt, bg=label_background, fg='white')
         self.l3.grid(row=0, column=4, padx=10, pady=10)
 
-        self.button1 = tkinter.Button(master=self.pu, text='save', bg='#aabbff', font=('Times New Roman', 15, 'bold'),
-                                      width=6)
+        self.button1 = tkinter.Button(master=self.pu, text='save', bg='#aabbff', font=button_font,
+                                      border=5, width=6)
         self.button1.grid(row=0, column=5, padx=10, pady=10)
 
         ############ time at ##########
@@ -67,8 +67,8 @@ class topWindow():
         self.l6 = tkinter.Label(self.pu, text='Mins', font=label_fnt, bg=label_background, fg='white')
         self.l6.grid(row=1, column=4, padx=10, pady=10)
 
-        self.button2 = tkinter.Button(master=self.pu, text='save', bg='#aabbff', font=label_fnt,
-                                      width=6)
+        self.button2 = tkinter.Button(master=self.pu, text='save', bg='#aabbff', font=button_font,
+                                      border=5, width=6)
         self.button2.grid(row=1, column=5, padx=10, pady=10)
 
         ########### Close button ##########
@@ -80,8 +80,8 @@ class topWindow():
                                          # corner_radius=15,
                                          bg='#aabbff',
                                          fg='black',
-                                         font=label_fnt,
-
+                                         font=button_font,
+                                         border=5,
                                          width=6
                                          )
         self.now_button.grid(row=2, column=1, pady=3)
@@ -93,7 +93,8 @@ class topWindow():
                                            # corner_radius=15,
                                            bg='red',
                                            fg='white',
-                                           font=label_fnt,
+                                           font=button_font,
+                                           border=5,
                                            command=self.pu.destroy,
                                            width=6
                                            )
@@ -232,12 +233,12 @@ def abort():
 st = tkinter.Tk()
 st.attributes('-transparentcolor', '#012345')
 st.title("Task Scheduler")
-st.geometry("400x540")
+st.geometry("320x400")
 st.config(bg='#012345')
 # st.overrideredirect(True)
 
-x_coordinate = 100
-y_coordinate = 60
+x_coordinate = 80
+y_coordinate = 40
 
 button_font = ('Times', 15, 'bold')
 button_width = 160
@@ -255,8 +256,9 @@ button_distance = 45
 #                                    )
 # r_button.place(x=100, y=60, width=200, height=50)
 
-shutdown_button = tkinter.Button(master=st,
+restart_button = tkinter.Button(master=st,
                           text="Restart",
+                          border=5,
                           # text_color='white',
                           # border_width=3,
                           # border_color='white',
@@ -266,30 +268,22 @@ shutdown_button = tkinter.Button(master=st,
                           font=button_font,
                           command=lambda: restart()
                           )
-shutdown_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
+restart_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
 y_coordinate += button_distance
 
-restart_button = tkinter.Button(master=st,
+shutdown_button = tkinter.Button(master=st,
                                    text="Shutdown",
-                                   # text_color='white',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='#12ffdd',
                                    font=button_font,
                                    command=shutdown
                                    )
-restart_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
+shutdown_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
 y_coordinate += button_distance
 
 lock_button = tkinter.Button(master=st,
                                    text="Lock",
-                                   # text_color='white',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='#12ffdd',
                                    font=button_font,
                                    command=lock
@@ -299,11 +293,7 @@ y_coordinate += button_distance
 
 hybernate_button = tkinter.Button(master=st,
                                    text="Hybernate",
-                                   # text_color='white',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='#12ffdd',
                                    font=button_font,
                                    command=hybernate
@@ -313,11 +303,7 @@ y_coordinate += button_distance
 
 scroff_button = tkinter.Button(master=st,
                                    text="Screen off",
-                                   # text_color='white',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='#12ffdd',
                                    font=button_font,
                                    command=screen_off
@@ -327,11 +313,7 @@ y_coordinate += button_distance
 
 abort_button = tkinter.Button(     master=st,
                                    text="Abort",
-                                   # text_color='White',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='#12ffdd',
                                    font=button_font,
                                    command=abort
@@ -339,19 +321,15 @@ abort_button = tkinter.Button(     master=st,
 abort_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
 y_coordinate += button_distance
 
-r_button = tkinter.Button(master=st,
+close_button = tkinter.Button(master=st,
                                    text="Close",
-                                   # text_color='White',
-                                   # border_width=3,
-                                   # border_color='white',
-                                   # corner_radius=15,
-                                   # text_font=('Times New Roman', 25),
+                                   border=5,
                                    bg='red',
                                    fg='white',
                                    font=('Times', 20, 'bold'),
                                    command=st.destroy
                                    )
-r_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
+close_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
 y_coordinate += button_distance
 
 
