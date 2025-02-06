@@ -9,8 +9,7 @@ import psutil
 
 from ctypes import windll
 
-from BlurWindow.blurWindow import blur
-
+# from BlurWindow.blurWindow import blur
 
 class topWindow:
 
@@ -145,11 +144,11 @@ class topWindow:
         self.close_button.bind("<Enter>", lambda x: self.close_button.config(bg='#990000'))
         self.close_button.bind("<Leave>", lambda x: self.close_button.config(bg='red'))
 
-
+# Calculation for Shutdownn after
 def cal_after(a, b):
     return (a * 60 + b) * 60
 
-
+# Calculation for Shutdownn at
 def cal_at(a, b):
     ctime = time.localtime(time.time())
     hour = ctime.tm_hour
