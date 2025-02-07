@@ -19,10 +19,10 @@ class topWindow:
         self.pu.config(bg='#abefef')
         self.pu.resizable(False,False)
 
-        self.sand_box = PhotoImage(file='icon\hourglass.png')
+        self.sand_box = PhotoImage(file='icon/hourglass.png')
         self.sand_box = self.sand_box.subsample(12)
 
-        self.clock = PhotoImage(file='icon\clock.png')
+        self.clock = PhotoImage(file='icon/clock.png')
         self.clock = self.clock.subsample(12)
 
         # self.pu.geometry('600x270')
@@ -369,98 +369,33 @@ st.resizable(False, False)
 # hWnd = windll.user32.GetForegroundWindow()
 # blur(hWnd)
 
-x_coordinate = 80
-y_coordinate = 40
 
-button_font = ('Times', 15, 'bold')
-button_width = 160
-button_hight = 40
-button_distance = 45
+def create_main_button(text, command, y_coordinate, bg="#12ffdd"):
+    """Creates and places a main window button"""
+    f = "black"
+    if bg=="red":
+        f = "#fff"
+    button = tkinter.Button(master=st, text=text, border=5, bg=bg, fg=f,  font=('Times', 15, 'bold'), command=command)
+    button.place(x=80, y=y_coordinate, width=160, height=40)
+    button.bind("<Enter>", lambda x: button.config(bg="#018888", fg="white"))
+    button.bind("<Leave>", lambda x: button.config(bg=bg, fg=f))
+    return button
 
-restart_button = tkinter.Button(master=st,
-                          text="Restart",
-                          border=5,
-                          bg='#12ffdd',
-                          font=button_font,
-                          command=lambda: restart()
-                          )
-restart_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-restart_button.bind("<Enter>", lambda x: on_enter(restart_button))
-restart_button.bind("<Leave>", lambda x: on_leave(restart_button))
-y_coordinate += button_distance
+# Create buttons dynamically
+buttons = [
+    ("Restart", restart),
+    ("Shutdown", shutdown),
+    ("Sign out", logoff),
+    ("Hibernate", hibernate),
+    ("Screen off", screen_off),
+    ("Abort", abort),
+    ("Close", st.destroy, "red")
+]
 
-shutdown_button = tkinter.Button(master=st,
-                                   text="Shutdown",
-                                   border=5,
-                                   bg='#12ffdd',
-                                   font=button_font,
-                                   command=shutdown
-                                   )
-shutdown_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-shutdown_button.bind("<Enter>", lambda x: on_enter(shutdown_button))
-shutdown_button.bind("<Leave>", lambda x: on_leave(shutdown_button))
-y_coordinate += button_distance
-
-logoff_button = tkinter.Button(master=st,
-                                   text="Sign out", # logoff
-                                   border=5,
-                                   bg='#12ffdd',
-                                   font=button_font,
-                                   command=logoff
-                                   )
-logoff_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-logoff_button.bind("<Enter>", lambda x: on_enter(logoff_button))
-logoff_button.bind("<Leave>", lambda x: on_leave(logoff_button))
-y_coordinate += button_distance
-
-hibernate_button = tkinter.Button(master=st,
-                                   text="Hibernate",
-                                   border=5,
-                                   bg='#12ffdd',
-                                   font=button_font,
-                                   command=hibernate
-                                   )
-hibernate_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-hibernate_button.bind("<Enter>", lambda x: on_enter(hibernate_button))
-hibernate_button.bind("<Leave>", lambda x: on_leave(hibernate_button))
-y_coordinate += button_distance
-
-scroff_button = tkinter.Button(master=st,
-                                   text="Screen off",
-                                   border=5,
-                                   bg='#12ffdd',
-                                   font=button_font,
-                                   command=screen_off
-                                   )
-scroff_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-scroff_button.bind("<Enter>", lambda x: on_enter(scroff_button))
-scroff_button.bind("<Leave>", lambda x: on_leave(scroff_button))
-y_coordinate += button_distance
-
-abort_button = tkinter.Button(     master=st,
-                                   text="Abort",
-                                   border=5,
-                                   bg='#12ffdd',
-                                   font=button_font,
-                                   command=abort
-                                   )
-abort_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-abort_button.bind("<Enter>", lambda x: on_enter(abort_button))
-abort_button.bind("<Leave>", lambda x: on_leave(abort_button))
-y_coordinate += button_distance
-
-close_button = tkinter.Button(master=st,
-                                   text="Close",
-                                   border=5,
-                                   bg='red',
-                                   fg='white',
-                                   font=button_font,
-                                   command=st.destroy
-                                   )
-close_button.place(x=x_coordinate, y=y_coordinate, width=button_width, height=button_hight)
-close_button.bind("<Enter>", lambda x: close_button.config(bg="#bb0000"))
-close_button.bind("<Leave>", lambda x: close_button.config(bg='red'))
-y_coordinate += button_distance
+y = 40
+for text, command, *color in buttons:
+    create_main_button(text, command, y, *(color if color else []))
+    y += 45
 
 
 # os.startfile("C:\Others\Studies\Mid_Night_Thoughts\mynotepad\mynotepad.exe")
